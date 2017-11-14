@@ -1,0 +1,11 @@
+---
+- name: copy csirtg-smrt rules
+  command: cp -r "/tmp/bearded-avenger-{{ cif_version }}/rules/default/" "{{ smrt_rules_path | default(smrt.rules_path) }}"
+
+- name: Update rule permissions
+  file:
+    path: "{{ smrt_rules_path | default(smrt.rules_path) }}/default"
+    mode: u=rwX,g=rwX,o=
+    recurse: yes
+    owner: "{{ smrt_user | default(smrt.user) }}"
+    group: "{{ smrt_group | default(smrt.group) }}"

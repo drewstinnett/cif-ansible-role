@@ -1,0 +1,13 @@
+---
+
+- name: systemd services
+  copy: src=router/{{ item }} dest=/etc/systemd/system owner=root group=root mode=0755
+  with_items:
+    - cif-router.service
+    - cif-httpd.service
+
+- name: enable services at boot
+  service: name={{ item }} enabled=yes daemon_reload=yes state=started
+  with_items:
+    - cif-router.service
+    - cif-httpd.service

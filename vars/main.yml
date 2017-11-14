@@ -1,0 +1,11 @@
+---
+cif_version: 3.0.0b0
+cif_user: cif
+cif_group: cif
+cif_etc_path: '/etc/cif'
+cif_home: '/home/{{ cif_user }}'
+
+smrt_enabled: true
+router_enabled: true
+
+GH_TOKEN: "{{ lookup('env', 'GH_TOKEN') }}"

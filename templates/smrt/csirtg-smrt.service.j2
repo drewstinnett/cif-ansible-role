@@ -1,0 +1,23 @@
+[Unit]
+Description=csirtg-smrt service
+
+[Service]
+Type=simple
+User={{ smrt_user | default(smrt.user) }}
+Group={{ smrt_group | default(smrt.group) }}
+PIDFile=/run/csirtg-smrt.pid
+ExecStart=/usr/local/bin/csirtg-smrt --remember --service --client cif --fireball --delay 5 -d
+KillMode=process
+Restart=on-failure
+KillSignal=SIGINT
+TimeoutStopSec=15
+LimitAS=infinity
+LimitRSS=infinity
+LimitCORE=infinity
+LimitNOFILE=65536
+Nice=-1
+
+EnvironmentFile=-/etc/smrt.env
+
+[Install]
+WantedBy=multi-user.target

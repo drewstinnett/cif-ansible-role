@@ -1,0 +1,43 @@
+---
+
+# pip stuff
+- name: upgrade pip
+  pip: name=pip extra_args="--upgrade"
+
+- name: upgrade cython
+  pip: name=cython extra_args="--upgrade"
+
+
+# cif
+- name: pull release from github
+  get_url:
+    url: "{{ router.release_url }}"
+    dest: /tmp/bearded-avenger.tar.gz
+  when: GH_TOKEN == ""
+
+# github likes to throttle when
+- name: pull release from github
+  get_url:
+    url: "{{ router.release_url }}"
+    dest: /tmp/bearded-avenger.tar.gz
+    headers: "Authorization: Token {{ GH_TOKEN }}"
+  when: GH_TOKEN is defined and GH_TOKEN != ""
+
+- name: unarchive
+  unarchive: src=/tmp/bearded-avenger.tar.gz dest=/tmp/ remote_src=true
+
+- name: "sanitize {{ cif_release }}"
+  set_fact: cif_release_dir="{{ cif_version | regex_replace('\/', '-') }}"
+
+- debug: msg="{{ cif_release_dir }}"
+
+- name: install requirements
+  command: pip install -r dev_requirements.txt chdir=/tmp/bearded-avenger-{{ cif_release_dir }}
+
+- name: run tests
+  command: python setup.py test chdir=/tmp/bearded-avenger-{{ cif_release_dir }}
+
+- name: install cif
+  command: python setup.py install chdir=/tmp/bearded-avenger-{{ cif_release_dir }}
+  environment:
+    CIF_ENABLE_INSTALL: 1

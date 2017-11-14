@@ -1,0 +1,9 @@
+if [ -f /etc/default/cif ] ; then
+	. /etc/default/cif
+fi
+
+{% include './templates/router/defaults.j2' %}
+
+export CIF_ROUTER_TRACE=0
+export CIF_STORE_TRACE=0
+export CIF_STORE_ES_TRACE=0

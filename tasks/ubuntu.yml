@@ -1,0 +1,16 @@
+---
+- name: "Check for version 16.04"
+  fail: msg="Must be version 16.04 or higher"
+  when: ansible_distribution_version | version_compare('16.04', '<')
+
+- name: install deps
+  apt:
+    state: latest
+    pkg: "{{ item }}"
+  with_items:
+    - build-essential
+    - python-minimal
+    - python-pytest
+    - python-pip
+    - python-dev
+    - sqlite3

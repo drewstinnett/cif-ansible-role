@@ -1,0 +1,4 @@
+---
+- name: 'check for hunter token'
+  fail: msg="You must set a hunter token"
+  when: router_hunter_token is undefined

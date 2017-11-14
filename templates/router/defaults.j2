@@ -1,0 +1,13 @@
+CIF_LOGLEVEL=INFO
+
+CIF_RUNTIME_PATH="{{ router_runtime | default(router.runtime_path) }}"
+CIF_STORE_STORE="{{ router_store_store | default() }}"
+CIF_STORE_NODES={{ router_store_nodes | default() }}
+CIF_ROUTER_CONFIG_PATH="{{ router_config_path | default(router.config_path) }}"
+CIF_HUNTER_EXCLUDE="{{ router_hunter_exclude | default(router.hunter.exclude) }}"
+CIF_HUNTER_THREADS="{{ router_hunter_threads | default(router.hunter.threads) }}"
+CIF_GATHERER_THREADS="{{ router_gatherer_threads | default(router.gatherer.threads) }}"
+
+CIFSDK_CLIENT_ZEROMQ_FIREBALL_SIZE="{{ router_httpd_fireball_size | default(router.httpd.fireball_size) }}"
+
+CIF_HTTPD_LISTEN="{{ router_httpd_listen | default(router.httpd.listen) }}"
