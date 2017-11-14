@@ -9,7 +9,7 @@
 - import_tasks: cif.yml
 
 - import_tasks: smrt/main.yml
-  when: smrt_enabled
+  when: cif_smrt_enabled
 
 - import_tasks: router/main.yml
-  when: router_enabled
+  when: cif_router_enabled

@@ -5,7 +5,7 @@ cif_group: cif
 cif_etc_path: '/etc/cif'
 cif_home: '/home/{{ cif_user }}'
 
-smrt_enabled: true
-router_enabled: true
+cif_smrt_enabled: "{{ smrt_enabled | default(true) }}"
+cif_router_enabled: "{{ router_enabled | default(true) }}"
 
 GH_TOKEN: "{{ lookup('env', 'GH_TOKEN') }}"
