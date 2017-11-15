@@ -19,19 +19,19 @@
   apt: pkg=bind9 state=installed update_cache=true cache_valid_time=86400
 
 - name: "Setting named.conf.options"
-  copy: src=ubuntu/bind_named.conf.options dest=/etc/bind/named.conf.options
+  copy: src=router/ubuntu/bind_named.conf.options dest=/etc/bind/named.conf.options
 
 - name: "Setting named.conf.local"
-  copy: src=ubuntu/bind_named.conf.local dest=/etc/bind/named.conf.local
+  copy: src=router/ubuntu/bind_named.conf.local dest=/etc/bind/named.conf.local
 
 - name: "Setting dhclient.conf"
-  copy: src=ubuntu/bind_dhclient.conf dest=/etc/dhcp/dhclient.conf
+  copy: src=router/ubuntu/bind_dhclient.conf dest=/etc/dhcp/dhclient.conf
 
 - name: "Setting /etc/resolvconf/resolv.conf.d/base"
-  copy: src=ubuntu/bind_head dest=/etc/resolvconf/resolv.conf.d/head
+  copy: src=router/ubuntu/bind_head dest=/etc/resolvconf/resolv.conf.d/head
 
 - name: enable services at boot
-  service: name=bind9 enabled=yes state=restarted
+  service: name=bind9 enabled=yes state=restarted daemon_reload=yes
 
 - name: Restart Network
   # Restart the network, sleep 3 seconds, return the
@@ -46,7 +46,7 @@
 
 # geoip
 - name: create /etc/geopip.conf
-  template: src=GeoIP.conf.j2 dest=/etc/GeoIP.conf owner=root group=root mode=0660
+  template: src=router/GeoIP.conf.j2 dest=/etc/GeoIP.conf owner=root group=root mode=0660
 
 - name: create GeoIP path /usr/local/share/GeoIP
   file: path=/usr/local/share/GeoIP state=directory owner=root group=root mode=0755

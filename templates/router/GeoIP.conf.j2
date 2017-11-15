@@ -3,8 +3,8 @@
 # pre-filled GeoIP.conf file.
 
 # The following UserId and LicenseKey are required placeholders:
-UserId {{ router.geoip.user }}
-LicenseKey {{ router_geoip_key | default(router.geoip.key) }}
+UserId {{ geoip.user }}
+LicenseKey {{ geoip_key | default(geoip.key) }}
 
 # Include one or more of the following ProductIds:
 # * GeoLite2-City - GeoLite 2 City
@@ -12,7 +12,7 @@ LicenseKey {{ router_geoip_key | default(router.geoip.key) }}
 # * 506 - GeoLite Legacy Country
 # * 517 - GeoLite Legacy ASN
 # * 533 - GeoLite Legacy City
-ProductIds {{ router_geoip_products | default(router.geoip.products) }}
+ProductIds {{ geoip_products | default(geoip.products) }}
 
 # The remaining settings are OPTIONAL.
 
