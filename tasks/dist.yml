@@ -7,12 +7,10 @@
 - name: upgrade cython
   pip: name=cython extra_args="--upgrade"
 
-- debug: msg="{{ router.release_url }}"
-
 # cif
 - name: pull release from github
   get_url:
-    url: "{{ router.release_url }}"
+    url: "{{ cif.release_url }}/{{ cif_version | default(cif.version) }}.tar.gz"
     dest: /tmp/bearded-avenger.tar.gz
   when: GH_TOKEN == ""
 
