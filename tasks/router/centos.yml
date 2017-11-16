@@ -40,7 +40,7 @@
   yum: pkg=bind state=installed
 
 - name: "Setting named.conf"
-  copy: src=centos/bind_named.conf dest=/etc/named.conf
+  copy: src=router/centos/bind_named.conf dest=/etc/named.conf
 
 - name: restart named
   command: systemctl restart named
@@ -49,7 +49,7 @@
   command: systemctl enable named
 
 - name: update NetworkManager.conf
-  copy: src=centos/NetworkManager.conf dest=/etc/NetworkManager/NetworkManager.conf
+  copy: src=router/centos/NetworkManager.conf dest=/etc/NetworkManager/NetworkManager.conf
 
 - name: restart NetworkManager
   command: systemctl restart NetworkManager
@@ -58,4 +58,4 @@
   command: systemctl restart network
 
 - name: copy resolv.conf
-  copy: src=centos/named_resolv.conf dest=/etc/resolv.conf
+  copy: src=router/centos/named_resolv.conf dest=/etc/resolv.conf

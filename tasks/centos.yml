@@ -11,6 +11,9 @@
   fail: msg="Must be version 7, {{ ansible_distribution_version }}"
   when: (ansible_distribution_version < "7" or ansible_distribution_version >= "8")
 
+- name: set router_bin_path to /bin
+  set_fact: router_bin_path='/bin'
+
 - name: install EPEL
   yum: name=epel-release state=latest
 

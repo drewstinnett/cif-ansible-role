@@ -1,6 +1,7 @@
 CIF_LOGLEVEL=INFO
 
 CIF_RUNTIME_PATH="{{ router_runtime | default(router.runtime_path) }}"
+CIF_DATA_PATH="{{ router_data_path | default(router.data_path) }}"
 CIF_STORE_STORE="{{ router_store_store | default() }}"
 CIF_STORE_NODES={{ router_store_nodes | default() }}
 CIF_ROUTER_CONFIG_PATH="{{ router_config_path | default(router.config_path) }}"

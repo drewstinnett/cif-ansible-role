@@ -1,4 +1,13 @@
 ---
+cif:
+  version: '3.0.0b0'
+  user: cif
+  group: cif
+  etc_path: /etc/cif
+  home: /home/cif
+  user_config_path: /home/cif/.cif.yml
+  release_url: "https://github.com/csirtgadgets/bearded-avenger/archive"
+
 smrt:
   user: "{{ cif_user }}"
   group: "{{ cif_group }}"
@@ -14,7 +23,6 @@ smrt:
   config_path: '/etc/cif/csirtg-smrt.yml'
 
 router:
-  release_url: "https://github.com/csirtgadgets/bearded-avenger/archive/{{ cif_version }}.tar.gz"
   user: "{{ cif_user }}"
   group: "{{ cif_group }}"
   home: "/home/{{ cif_user }}"
