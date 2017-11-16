@@ -8,6 +8,8 @@
 ## when: ansible_distribution == 'CentOS'
 
 - import_tasks: paths.yml
+  tags: paths
+
 - import_tasks: tokens.yml
   when: cif_router_enabled and smrt_cif_token is undefined and router_hunter_token is undefined
   tags: tokens
