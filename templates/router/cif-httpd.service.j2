@@ -1,0 +1,25 @@
+[Unit]
+Description=cif-httpd service
+
+[Service]
+Type=simple
+User={{ router_user | default(router.user) }}
+User={{ router_user | default(router.user) }}
+PIDFile={{ router_runtime_path | default(router.runtime_path) }}/gunicorn.pid
+ExecStart=/usr/local/bin/gunicorn -w 4 -b {{ router_httpd_listen | default(router.httpd.listen) }}:5000 cif.httpd:app --log-level DEBUG --worker-class gevent --preload --max-requests 100 --keep-alive 75 --timeout 75 --log-level DEBUG --access-logfile /var/log/gunicorn/access.log --error-logfile /var/log/gunicorn/error.log --timeout 300 -p {{ router_runtime_path | default(router.runtime_path) }}/gunicorn.pid
+KillMode=process
+Restart=on-failure
+KillSignal=SIGINT
+TimeoutStopSec=15
+LimitAS=infinity
+LimitRSS=infinity
+LimitCORE=infinity
+LimitNOFILE=65536
+Nice=-1
+
+
+# https://coreos.com/os/docs/latest/using-environment-variables-in-systemd-units.html
+EnvironmentFile=-/etc/cif.env
+
+[Install]
+WantedBy=multi-user.target

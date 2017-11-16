@@ -11,3 +11,7 @@ cif_router_enabled: "{{ router_enabled | default(true) }}"
 
 GH_TOKEN: "{{ lookup('env', 'GH_TOKEN') }}"
 router_store_args: ''
+router_hunter_threads: "{{ lookup('env', 'CIF_HUNTER_THREADS') }}"
+router_hunter_advanced: "{{ lookup('env', 'CIF_HUNTER_ADVANCED') }}"
+router_gatherer_geo_fqdn: "{{ lookup('env', 'CIF_GATHERER_GEO_FQDN') }}"
+router_store_store: 'sqlite'

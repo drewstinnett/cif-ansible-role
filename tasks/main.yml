@@ -2,8 +2,11 @@
 - import_tasks: ubuntu.yml
   when: ansible_distribution == "Ubuntu"
 
-#- include: centos.yml
-# when: ansible_distribution == 'CentOS'
+- include: centos.yml
+  when: ansible_distribution == 'CentOS'
+
+- include: centos.yml
+  when: ansible_distribution == 'RedHat'
 
 - import_tasks: user.yml
 - import_tasks: cif.yml
