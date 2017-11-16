@@ -22,6 +22,7 @@
 
 - name: copy cif-router.yml
   template: src=router/cif_router.yml.j2 dest="{{ router_config_path | default(router.config_path) }}" mode=0660 owner="{{ router_user | default(router.user) }}" group="{{ router_group | default(router.group) }}"
+  when: router_hunter_token is defined and router_hunter_token != ""
 
 - name: profile
   template: src=router/cifrc.j2 dest="{{ cif_home | default(router.home) }}/.cifrc" mode=0660 owner="{{ cif_user | default(router.user) }}" group="{{ cif_group | default(router.group) }}"
