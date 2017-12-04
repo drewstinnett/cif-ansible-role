@@ -17,7 +17,7 @@
 # github likes to throttle when
 - name: pull release from github
   get_url:
-    url: "{{ router.release_url }}"
+    url: "{{ cif.release_url }}/{{ cif_version | default(cif.version) }}.tar.gz"
     dest: /tmp/bearded-avenger.tar.gz
     headers: "Authorization: Token {{ GH_TOKEN }}"
   when: GH_TOKEN is defined and GH_TOKEN != ""
