@@ -16,7 +16,7 @@
     --store {{ router_store_store | default(router.store.store) }}
     --token-create-admin
     --config-path {{ cif_user_config_path }}
-    -d {{ router_store_args }}
+    -d {{ cif_router_store_args }}
   when: not f.stat.exists
 
 - name: 'update permissions'
@@ -36,7 +36,7 @@
     --runtime-path {{ smrt_runtime_path | default(smrt.runtime_path) }}
     --token-create-smrt
     --config-path {{ smrt_config_path | default(smrt.config_path) }}
-    -d {{ router_store_args }}
+    -d {{ cif_router_store_args }}
   when: not f.stat.exists
 
 - name: 'update permissions'
@@ -56,7 +56,7 @@
     --runtime-path {{ router_runtime_path | default(router.runtime_path) }}
     --token-create-hunter
     --config-path {{ router_config_path | default(router.config_path) }}
-    -d {{ router_store_args }}
+    -d {{ cif_router_store_args }}
   when: not f.stat.exists
 
 - name: 'update permissions'
