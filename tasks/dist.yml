@@ -12,7 +12,7 @@
   get_url:
     url: "{{ cif.release_url }}/{{ cif_version | default(cif.version) }}.tar.gz"
     dest: /tmp/bearded-avenger.tar.gz
-  when: GH_TOKEN == ""
+  when: GH_TOKEN is undefined or GH_TOKEN == ""
 
 # github likes to throttle when
 - name: pull release from github

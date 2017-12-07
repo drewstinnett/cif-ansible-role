@@ -30,6 +30,9 @@
 - name: "Setting /etc/resolvconf/resolv.conf.d/base"
   copy: src=router/ubuntu/bind_head dest=/etc/resolvconf/resolv.conf.d/head
 
+- name: 'copying bind9 default'
+  copy: src=router/ubuntu/bind_default dest=/etc/defaults/bind9
+
 - name: enable services at boot
   service: name=bind9 enabled=yes state=restarted daemon_reload=yes
 
