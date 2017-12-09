@@ -7,7 +7,7 @@ User={{ router_user | default(router.user) }}
 User={{ router_user | default(router.user) }}
 PIDFile={{ router_runtime_path | default(router.runtime_path) }}/gunicorn.pid
 
-ExecStart={{ router_bin_path | default ('/usr/local/bin') }}/gunicorn -w {{ router_gunicorn_workers | default(2) }} \
+ExecStart={{ router_bin_path | default ('/usr/local/bin') }}/gunicorn -w {{ router_gunicorn_workers | default(4) }} \
   --max-requests-jitter 5 -b {{ router_httpd_listen | default(router.httpd.listen) }}:5000 cif.httpd:app --log-level DEBUG \
   --worker-class gevent --preload --max-requests 25 --graceful-timeout 120 --keep-alive 30 --timeout 150 --log-level DEBUG \
   --access-logfile /var/log/gunicorn/access.log --error-logfile /var/log/gunicorn/error.log \
