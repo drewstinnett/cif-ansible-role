@@ -6,6 +6,7 @@ Type=simple
 User={{ smrt_user | default(smrt.user) }}
 Group={{ smrt_group | default(smrt.group) }}
 PIDFile=/run/csirtg-smrt.pid
+RuntimeDirectory=smrt
 ExecStart={{ router_bin_path | default ('/usr/local/bin') }}/csirtg-smrt --remember --service --client cif --fireball --delay 5 -d --goback 7
 KillMode=process
 Restart=on-failure

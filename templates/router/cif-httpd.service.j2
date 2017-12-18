@@ -5,6 +5,7 @@ Description=cif-httpd service
 Type=simple
 User={{ router_user | default(router.user) }}
 User={{ router_user | default(router.user) }}
+RuntimeDirectory=cif
 PIDFile={{ router_runtime_path | default(router.runtime_path) }}/gunicorn.pid
 
 ExecStart={{ router_bin_path | default ('/usr/local/bin') }}/gunicorn -w {{ router_gunicorn_workers | default(4) }} \
