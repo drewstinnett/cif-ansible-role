@@ -6,7 +6,6 @@ Type=simple
 User={{ router_user | default(router.user) }}
 User={{ router_user | default(router.user) }}
 RuntimeDirectory=cif
-RuntimeDirectoryPreserve=yes
 PIDFile={{ router_runtime_path | default(router.runtime_path) }}/cif_router.pid
 ExecStart={{ router_bin_path | default ('/usr/local/bin') }}/cif-router --config={{ router_config_path | default(router.config_path) }}
 KillMode=process
