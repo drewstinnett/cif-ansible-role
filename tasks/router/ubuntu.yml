@@ -35,6 +35,7 @@
 
 - name: enable services at boot
   service: name=bind9 enabled=yes state=restarted daemon_reload=yes
+  when: DOCKER_BUILD is defined and DOCKER_BUILD != ""
 
 - name: Restart Network
   # Restart the network, sleep 3 seconds, return the
@@ -42,6 +43,7 @@
   # This is to work-around a glitch in Ansible where
   # it detects a successful network restart as a failure.
   command: perl -e 'my $exit_code = system("service networking restart"); sleep 3; $exit_code = $exit_code >> 8; exit($exit_code);'
+  when: DOCKER_BUILD is defined and DOCKER_BUILD != ""
 
 - name: Update resolvconf
   command: resolvconf -u
