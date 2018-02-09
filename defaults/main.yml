@@ -1,6 +1,6 @@
 ---
 cif:
-  version: '3.0.0b3'
+  version: '3.0.0b5'
   user: cif
   group: cif
   etc_path: /etc/cif
