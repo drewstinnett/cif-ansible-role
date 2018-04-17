@@ -58,6 +58,7 @@
 
 - name: update geoip databases
   command: geoipupdate -v
+  ignore_errors: True
 
 - name: create geoip update cron
   cron: name="geoip update" user="root" job="/usr/bin/geoipupdate"
