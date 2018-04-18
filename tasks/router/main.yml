@@ -13,4 +13,5 @@
   tags: tokens
 
 - import_tasks: services.yml
+  when: DOCKER_BUILD is undefined or DOCKER_BUILD == 'no'
   tags: services
