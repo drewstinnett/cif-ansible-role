@@ -8,7 +8,7 @@ Role Variables
 
 ```
 # variables
-cif_version: 3.0.0b0
+cif_version: 3.0.0b5
 cif_user: cif
 cif_group: cif
 cif_etc_path: '/etc/cif'

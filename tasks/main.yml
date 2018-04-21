@@ -20,9 +20,8 @@
 - import_tasks: sdist.yml
   when: cif_build_sdist is defined and cif_build_sdist != ""
 
-- import_tasks: smrt/main.yml
-  when: cif_smrt_enabled
-
 - import_tasks: router/main.yml
   when: cif_router_enabled
 
+- import_tasks: smrt/main.yml
+  when: cif_smrt_enabled

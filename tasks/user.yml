@@ -6,4 +6,3 @@
 
 - name: Ensure user has a .profile
   file: path="{{ cif_home }}/.profile" state=touch owner={{ cif_user }} group={{ cif_group }} mode=0660
-

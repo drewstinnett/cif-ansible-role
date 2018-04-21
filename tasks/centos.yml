@@ -33,7 +33,7 @@
     - libxslt-devel
 
 - name: update python-dateutil
-  pip: name="python-dateutil==2.4"
+  pip: name="python-dateutil==2.6"
 
 - name: update flask-limiter
   pip: name='Flask-Limiter>=0.9.4'

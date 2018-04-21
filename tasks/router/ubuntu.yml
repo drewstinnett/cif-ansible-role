@@ -34,7 +34,8 @@
   copy: src=router/ubuntu/bind_default dest=/etc/default/bind9
 
 - name: enable services at boot
-  service: name=bind9 enabled=yes state=restarted daemon_reload=yes
+  systemd: name=bind9 enabled=yes state=restarted daemon_reload=yes
+  when: DOCKER_BUILD is undefined or DOCKER_BUILD == "no"
 
 - name: Restart Network
   # Restart the network, sleep 3 seconds, return the
@@ -42,6 +43,7 @@
   # This is to work-around a glitch in Ansible where
   # it detects a successful network restart as a failure.
   command: perl -e 'my $exit_code = system("service networking restart"); sleep 3; $exit_code = $exit_code >> 8; exit($exit_code);'
+  when: DOCKER_BUILD is undefined or DOCKER_BUILD == "no"
 
 - name: Update resolvconf
   command: resolvconf -u
@@ -56,6 +58,7 @@
 
 - name: update geoip databases
   command: geoipupdate -v
+  ignore_errors: True
 
 - name: create geoip update cron
   cron: name="geoip update" user="root" job="/usr/bin/geoipupdate"
