@@ -51,4 +51,4 @@ router:
 geoip:
   user: 999999
   key:  "000000000000"
-  products: "GeoLite2-City GeoLite2-Country GeoLite-Legacy-IPv6-City GeoLite-Legacy-IPv6-Country 506 517 533"
+  products: "GeoLite2-City GeoLite2-Country GeoLite2-ASN"
