@@ -11,6 +11,7 @@
 
 - name: unarchive geoipupdate
   unarchive:
+    remote_src: yes
     src: /tmp/geoipupdate-2.2.2.tar.gz
     dest: /tmp/
 
