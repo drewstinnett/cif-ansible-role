@@ -1,7 +1,7 @@
 ---
 
 - name: systemd services
-  template: src=smrt/csirtg-smrt.service.j2 dest=/etc/systemd/system/csirtg-smrt.service owner=root group=root mode=0755
+  template: src=smrt/csirtg-smrt.service.j2 dest=/etc/systemd/system/csirtg-smrt.service owner=root group=root mode=0644
 
 - name: enable services at boot
   systemd: name={{ item }} enabled=yes daemon_reload=yes state=started
