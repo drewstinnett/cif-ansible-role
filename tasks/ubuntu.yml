@@ -3,14 +3,22 @@
   fail: msg="Must be version 16.04 or higher"
   when: ansible_distribution_version | version_compare('16.04', '<')
 
+- name: Make it so that resolvconf works gud
+  debconf:
+    name: resolvconf
+    question: resolvconf/linkify-resolvconf
+    value: false
+    vtype: boolean
+
 - name: install deps
   apt:
     state: latest
-    pkg: "{{ item }}"
-  with_items:
-    - build-essential
-    - python-minimal
-    - python-pytest
-    - python-pip
-    - python-dev
-    - sqlite3
+    update_cache: true
+    pkg:
+      - build-essential
+      - python-minimal
+      - python-pytest
+      - python-pip
+      - python-dev
+      - sqlite3
+      - resolvconf

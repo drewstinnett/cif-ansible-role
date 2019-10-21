@@ -30,8 +30,27 @@
 
 - debug: msg="{{ cif_release_dir }}"
 
+- name: Extract archives
+  unarchive:
+    src: "{{ item }}"
+    dest: "/tmp/"
+    remote_src: true
+  with_items:
+    - "https://github.com/csirtgadgets/bearded-avenger-deploymentkit/archive/{{ cif_version }}.tar.gz"
+    - "https://github.com/csirtgadgets/bearded-avenger/archive/{{ cif_version }}.tar.gz"
+
+- name: Remove installed deb version of PyYAML
+  package:
+    name: python-yaml
+    state: absent
+
+- name: Install a new specific version of requests
+  pip:
+    name: requests==2.22.0
+
 - name: install requirements
-  command: pip install -r dev_requirements.txt chdir=/tmp/bearded-avenger-{{ cif_release_dir }}
+  pip:
+    requirements: "/tmp/bearded-avenger-{{ cif_release_dir }}/dev_requirements.txt"
 
 - name: run tests
   command: python setup.py test chdir=/tmp/bearded-avenger-{{ cif_release_dir }}

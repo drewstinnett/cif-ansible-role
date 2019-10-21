@@ -2,10 +2,9 @@
 - name: install deps
   apt:
     state: latest
-    pkg: "{{ item }}"
-  with_items:
-    - geoipupdate
-    - libgeoip-dev
+    pkg:
+      - geoipupdate
+      - libgeoip-dev
 
 - name: configure /etc/security/limits.conf
   lineinfile: dest=/etc/security/limits.conf line="cif             soft    nofile            20000"
@@ -59,6 +58,11 @@
 - name: update geoip databases
   command: geoipupdate -v
   ignore_errors: True
+
+- name: Make sure that /etc/cron.d exists
+  file:
+    path: /etc/cron.d
+    state: directory
 
 - name: create geoip update cron
   cron: name="geoip update" user="root" job="/usr/bin/geoipupdate"
