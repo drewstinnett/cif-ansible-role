@@ -1,13 +1,13 @@
 ---
 - name: "Check for version 16.04"
   fail: msg="Must be version 16.04 or higher"
-  when: ansible_distribution_version | version_compare('16.04', '<')
+  when: ansible_distribution_version is version_compare('16.04', '<')
 
-- name: Make it so that resolvconf works gud
+- name: Make it so that resolvconf works the way we expect
   debconf:
     name: resolvconf
     question: resolvconf/linkify-resolvconf
-    value: false
+    value: "false"
     vtype: boolean
 
 - name: install deps

@@ -1,12 +1,8 @@
 ---
 - name: Converge
   hosts: all
-  gather_facts: false
-  pre_tasks:
-    - name: Ignore hardware facts, since it blows up docker at times
-      setup:
-        gather_subset: 'all,!hardware'
+  become: true
   roles:
-    - role: "{{ lookup('env','PWD')|basename }}"
-  vars:
-    cif_version: 3.0.4
+    - role: cif-ansible-role
+      vars:
+        cif_version: 3.0.4

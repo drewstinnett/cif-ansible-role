@@ -8,7 +8,13 @@
     - "{{ router_data_path | default(router.data_path) }}"
 
 - name: 'create cif sqlite db'
-  file: path={{ router_data_path | default(router.data_path) }}/cif.db owner={{ router_user | default(router.user) }} group={{ router_group | default(router.group) }} mode=0660 state=touch
+  copy:
+    content: ""
+    force: false
+    path: "{{ router_data_path | default(router.data_path) }}/cif.db"
+    owner: "{{ router_user | default(router.user) }}"
+    group: "{{ router_group | default(router.group) }}"
+    mode: 0660
   when: router_store_store is undefined or router_store_store == 'sqlite'
 
 - name: 'make sure gunicorn logging paths exist'

@@ -26,7 +26,8 @@
   unarchive: src=/tmp/bearded-avenger.tar.gz dest=/tmp/ remote_src=true
 
 - name: "sanitize {{ cif_release }}"
-  set_fact: cif_release_dir="{{ cif_version | regex_replace('\/', '-') }}"
+  set_fact:
+    cif_release_dir: "{{ cif_version | regex_replace('\/', '-') }}"
 
 - debug: msg="{{ cif_release_dir }}"
 
@@ -54,8 +55,12 @@
 
 - name: run tests
   command: python setup.py test chdir=/tmp/bearded-avenger-{{ cif_release_dir }}
+  # Tests aren't changing the system, so...maybe? 🤔
+  changed_when: false
 
 - name: install cif
   command: python setup.py install chdir=/tmp/bearded-avenger-{{ cif_release_dir }}
+  args:
+    creates: /usr/local/bin/cif
   environment:
     CIF_ENABLE_INSTALL: 1

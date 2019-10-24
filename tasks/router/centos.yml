@@ -38,7 +38,7 @@
 # bind
 
 - name: Install bind9
-  yum: pkg=bind state=installed
+  yum: pkg=bind state=present
 
 - name: "Setting named.conf"
   copy: src=router/centos/bind_named.conf dest=/etc/named.conf

@@ -15,7 +15,7 @@
 
 # bind 9
 - name: Install bind9
-  apt: pkg=bind9 state=installed update_cache=true cache_valid_time=86400
+  apt: pkg=bind9 state=present update_cache=true cache_valid_time=86400
 
 - name: "Setting named.conf.options"
   copy: src=router/ubuntu/bind_named.conf.options dest=/etc/bind/named.conf.options
