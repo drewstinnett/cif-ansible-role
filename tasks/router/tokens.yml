@@ -4,7 +4,8 @@
     cif_router_store_args: '--nodes {{ router_store_nodes }}'
   when: router_store_store is defined and router_store_store == 'elasticsearch'
 
-- stat: path="{{ cif_user_config_path }}"
+- stat:
+    path: "{{ cif_user_config_path }}"
   register: f
 
 - name: 'generate cif admin token'

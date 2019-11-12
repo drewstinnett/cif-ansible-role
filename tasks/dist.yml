@@ -59,8 +59,9 @@
   changed_when: false
 
 - name: install cif
-  command: python setup.py install chdir=/tmp/bearded-avenger-{{ cif_release_dir }}
+  command: python setup.py install
   args:
-    creates: /usr/local/bin/cif
+    creates: /usr/local/bin/cif-store
+    chdir: "/tmp/bearded-avenger-{{ cif_release_dir }}"
   environment:
     CIF_ENABLE_INSTALL: 1

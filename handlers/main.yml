@@ -1,1 +1,7 @@
 ---
+
+- name: restart bind
+  service:
+    name: bind9
+    state: restarted
+  when: DOCKER_BUILD is undefined or DOCKER_BUILD == "no"

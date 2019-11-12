@@ -1,7 +1,12 @@
 ---
 
 - name: Ensure paths exists
-  file: path="{{ item }}" state=directory mode=750 owner="{{ router_user | default(router.user) }}" group="{{ router_group | default(router.group) }}"
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: 750
+    owner: "{{ router_user | default(router.user) }}"
+    group: "{{ router_group | default(router.group) }}"
   with_items:
     - "{{ router_runtime_path | default(router.runtime_path) }}"
     - "{{ router_etc_path | default(router.etc_path) }}"
@@ -11,7 +16,7 @@
   copy:
     content: ""
     force: false
-    path: "{{ router_data_path | default(router.data_path) }}/cif.db"
+    dest: "{{ router_data_path | default(router.data_path) }}/cif.db"
     owner: "{{ router_user | default(router.user) }}"
     group: "{{ router_group | default(router.group) }}"
     mode: 0660

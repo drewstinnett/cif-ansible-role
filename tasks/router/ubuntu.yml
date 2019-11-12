@@ -30,10 +30,16 @@
   copy: src=router/ubuntu/bind_head dest=/etc/resolvconf/resolv.conf.d/head
 
 - name: 'copying bind9 default'
-  copy: src=router/ubuntu/bind_default dest=/etc/default/bind9
+  copy:
+    src: router/ubuntu/bind_default
+    dest: /etc/default/bind9
+  notify: restart bind
+
+- name: flush handlers
+  meta: flush_handlers
 
 - name: enable services at boot
-  systemd: name=bind9 enabled=yes state=restarted daemon_reload=yes
+  systemd: name=bind9 enabled=yes daemon_reload=yes
   when: DOCKER_BUILD is undefined or DOCKER_BUILD == "no"
 
 - name: Restart Network
