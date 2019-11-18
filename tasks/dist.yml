@@ -53,10 +53,16 @@
   pip:
     requirements: "/tmp/bearded-avenger-{{ cif_release_dir }}/dev_requirements.txt"
 
+- name: run tests
+  command: python setup.py test chdir=/tmp/bearded-avenger-{{ cif_release_dir }}
+
 - name: install cif
-  command: python setup.py install
+  command: "{{ item }} setup.py install"
   args:
     creates: /usr/local/bin/cif-store
     chdir: "/tmp/bearded-avenger-{{ cif_release_dir }}"
   environment:
     CIF_ENABLE_INSTALL: 1
+  with_items:
+    - python
+    - python3
