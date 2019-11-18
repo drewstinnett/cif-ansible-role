@@ -60,7 +60,6 @@
 - name: install cif
   command: "{{ item }} setup.py install"
   args:
-    creates: /usr/local/bin/cif-store
     chdir: "/tmp/bearded-avenger-{{ cif_release_dir }}"
   environment:
     CIF_ENABLE_INSTALL: 1
