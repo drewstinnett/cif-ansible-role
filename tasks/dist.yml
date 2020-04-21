@@ -64,5 +64,4 @@
   environment:
     CIF_ENABLE_INSTALL: 1
   with_items:
-    - python
     - python3
