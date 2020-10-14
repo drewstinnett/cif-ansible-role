@@ -7,38 +7,8 @@
 - name: upgrade cython
   pip: name=cython extra_args="--upgrade"
 
-# cif
-- name: pull release from github
-  get_url:
-    url: "{{ cif.release_url }}/{{ cif_version | default(cif.version) }}.tar.gz"
-    dest: /tmp/bearded-avenger.tar.gz
-  when: GH_TOKEN is undefined or GH_TOKEN == ""
-
-# github likes to throttle when
-- name: pull release from github
-  get_url:
-    url: "{{ cif.release_url }}/{{ cif_version | default(cif.version) }}.tar.gz"
-    dest: /tmp/bearded-avenger.tar.gz
-    headers: "Authorization: Token {{ GH_TOKEN }}"
-  when: GH_TOKEN is defined and GH_TOKEN != ""
-
 - name: unarchive
   unarchive: src=/tmp/bearded-avenger.tar.gz dest=/tmp/ remote_src=true
-
-- name: "sanitize {{ cif_release }}"
-  set_fact:
-    cif_release_dir: "{{ cif_version | regex_replace('\/', '-') }}"
-
-- debug: msg="{{ cif_release_dir }}"
-
-- name: Extract archives
-  unarchive:
-    src: "{{ item }}"
-    dest: "/tmp/"
-    remote_src: true
-  with_items:
-    - "https://github.com/csirtgadgets/bearded-avenger-deploymentkit/archive/{{ cif_version }}.tar.gz"
-    - "https://github.com/csirtgadgets/bearded-avenger/archive/{{ cif_version }}.tar.gz"
 
 - name: Remove installed deb version of PyYAML
   package:
@@ -49,18 +19,14 @@
   pip:
     name: requests==2.22.0
 
-- name: install requirements
-  pip:
-    requirements: "/tmp/bearded-avenger-{{ cif_release_dir }}/dev_requirements.txt"
-
 - name: run tests
-  command: python setup.py test chdir=/tmp/bearded-avenger-{{ cif_release_dir }}
+  command: python setup.py test chdir=/tmp/bearded-avenger
   ignore_errors: true
 
 - name: install cif
   command: "{{ item }} setup.py install"
   args:
-    chdir: "/tmp/bearded-avenger-{{ cif_release_dir }}"
+    chdir: "/tmp/bearded-avenger"
   environment:
     CIF_ENABLE_INSTALL: 1
   with_items:
